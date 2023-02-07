@@ -10,7 +10,6 @@ export default function Home() {
           <h1>
             <Image src={Logo} alt="" height="52" width="52" />
           </h1>
-          <h1>Perguntas e Respostas</h1>
         </div>
       </header>
 
