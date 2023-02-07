@@ -3,7 +3,7 @@ import Link from "next/link";
 import Logo from "../../../public/favicon.png";
 import styles from "./index.module.css";
 
-export default function MoreInfo() {
+export default function List() {
   return (
     <main className={styles.container}>
       <div className={styles.row1}>
@@ -11,8 +11,8 @@ export default function MoreInfo() {
           <Image src={Logo} alt="" height="96" width="96" />
         </div>
         <div>
-          <h3>autorizacao</h3>
-          <h3>online</h3>
+          <h3>lista de</h3>
+          <h3>perguntas</h3>
         </div>
       </div>
 
