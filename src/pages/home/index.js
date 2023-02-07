@@ -10,12 +10,20 @@ export default function Home() {
           <h1>
             <Image src={Logo} alt="" height="52" width="52" />
           </h1>
-          <h1>Pergunta e Resposta</h1>
+          <h1>Perguntas e Respostas</h1>
         </div>
       </header>
 
       <main>
-        <div className={styles.blocks}></div>
+        <div className={styles.blocks}>
+          <div className={styles.block1}>
+            <h3>Faça sua pergunta</h3>
+            <textarea name="" id="" cols="30" rows="6"></textarea>
+            <p>
+              <button>ENVIAR</button>
+            </p>
+          </div>
+        </div>
       </main>
 
       <footer>
