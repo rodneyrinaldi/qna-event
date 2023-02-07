@@ -9,7 +9,7 @@
 .header {
   display: fles;
   justify-direction: column;
-  height: 10vh;
+  height: 11vh;
   width: 100vw;
   padding: 12px 0 20px;
   background-color: var(--color8a);
@@ -27,7 +27,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 10vh;
+  height: 15vh;
   padding: 4vh 0;
   color: var(--color8a);
   background-color: var(--color3a);
@@ -40,7 +40,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  height: 76vh;
+  height: 70vh;
   margin: 20px auto;
 }
 
