@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../../public/favicon2.png";
+import Logo from "../../../public/favicon.png";
 import styles from "./index.module.css";
 
 export default function MoreInfo() {
