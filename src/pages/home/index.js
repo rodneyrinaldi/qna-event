@@ -9,6 +9,9 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [show, setShow] = useState(true);
+  const [create, setCreate] = useState(true);
+  const [question, setQuestion] = useState("");
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {}, []);
 
@@ -16,8 +19,9 @@ export default function Home() {
     document.getElementById("status").innerHTML = "";
   }
 
-  function handleRefresh() {
-    alert(2);
+  function handleCreate(e) {
+    e.preventDefault();
+    setCreate(!create);
   }
 
   function handleShow(e) {
@@ -25,11 +29,74 @@ export default function Home() {
     setShow(!show);
   }
 
+  function handleRefresh() {
+    console.log(1);
+  }
+
+  function FormCreate() {
+    return (
+      <div className={styles.block1}>
+        <h3>
+          Criar nova sessão{" "}
+          <div>
+            <a onClick={handleCreate}>
+              <Image src={Logo5} alt="" height="52" width="52" />
+            </a>
+          </div>
+        </h3>
+        <h4></h4>
+      </div>
+    );
+  }
+
+  function FormQuestion() {
+    return (
+      <div className={styles.block1}>
+        <h3>Faça sua pergunta</h3>
+        <textarea
+          name="txtQuestion"
+          id="txtQuestion"
+          cols="30"
+          rows="5"
+          onFocus={handleFocus}
+        ></textarea>
+        <p>
+          <button onClick={handleClick}>ENVIAR</button>
+        </p>
+        <p id="status"></p>
+      </div>
+    );
+  }
+
+  function FormQuestions() {
+    return (
+      <div className={styles.block1}>
+        <h3>
+          Lista de perguntas{" "}
+          <div>
+            <a onClick={handleRefresh}>
+              <Image src={Logo5} alt="" height="52" width="52" />
+            </a>
+          </div>
+        </h3>
+        <h4>
+          <ul>
+            {questions.map((quest) => (
+              <li key={quest}>{quest}</li>
+            ))}
+          </ul>
+        </h4>
+      </div>
+    );
+  }
+
   function handleClick() {
-    const question = document.getElementById("txtQuestion").text;
     let text;
     if (confirm("Press a button!") == true) {
+      const txtquestion = document.getElementById("txtQuestion").value;
       document.getElementById("txtQuestion").value = "";
+      setQuestion(txtquestion);
+      questions.push(txtquestion);
       text = "Enviada com sucesso!";
     } else {
       text = "Envio cancelado!";
@@ -43,14 +110,18 @@ export default function Home() {
       <header>
         <div className={styles.header}>
           <h1>
-            <Image src={Logo} alt="" height="52" width="52" />
+            <a href="" onClick={handleCreate}>
+              <Image src={Logo} alt="" height="52" width="52" />
+            </a>
             <span> </span>
+
             <a href="https://dev.rodneyrinaldi.com">
               <Image src={Logo2} alt="" height="52" width="52" />
             </a>
             <span> </span>
+
             <a href="" onClick={handleShow}>
-              <Image src={show ? Logo3 : Logo4} alt="" height="52" width="52" />
+              <Image src={show ? Logo4 : Logo3} alt="" height="52" width="52" />
             </a>
           </h1>
         </div>
@@ -58,34 +129,12 @@ export default function Home() {
 
       <main>
         <div className={styles.blocks}>
-          {show ? (
-            <div className={styles.block1}>
-              <h3>Faça sua pergunta</h3>
-              <textarea
-                name="txtQuestion"
-                id="txtQuestion"
-                cols="30"
-                rows="6"
-                onFocus={handleFocus}
-              ></textarea>
-              <p>
-                <button onClick={handleClick}>ENVIAR</button>
-              </p>
-              <p id="status"></p>
-            </div>
+          {create ? (
+            <FormCreate />
+          ) : show ? (
+            <FormQuestion />
           ) : (
-            <div className={styles.block1}>
-              <h3>
-                Lista de perguntas{" "}
-                <div>
-                  <a onClick={handleRefresh}>
-                    <Image src={Logo5} alt="" height="52" width="52" />
-                  </a>
-                </div>
-              </h3>
-              <h4>{"xxx"}</h4>
-              <h4>{"question"}</h4>
-            </div>
+            <FormQuestions />
           )}
         </div>
       </main>
@@ -105,4 +154,11 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const User = await User.findOne(ctx.query.id);
+  return {
+    props: { User }, // will be passed to the page component as props
+  };
 }
